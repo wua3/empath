@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
 
+::-webkit-scrollbar {
+    width: 0px;
+}
+
 body {
     font-family: 'Karla';
     font-size: 16px;
@@ -56,6 +60,14 @@ footer {
     max-width: 70%;
 }
 
+.last-msg-right {
+    border-bottom-right-radius: 0px;
+}
+
+.last-msg-left {
+    border-bottom-left-radius: 0px;
+}
+
 .empath-pos {
     align-items: flex-start;
 }
@@ -96,7 +108,23 @@ button {
     font-weight: 700;
 }
 
-.log {
+#log {
     background-color: #eee;
-    padding-bottom: 10px;
+    margin-bottom: 15px;
+    max-height: 40vh;
+}
+
+#log-wrap {
+    margin: 20px;
+    overflow: auto;
+}
+
+h3 {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+#clear {
+    margin-bottom: 0px;
+    text-align: center;
 }
