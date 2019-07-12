@@ -1,7 +1,12 @@
 const form = document.querySelector('form');
 const ul = document.querySelector('ul');
-const button = document.querySelector('button');
+const clearButton = document.getElementById('clear');
+const showButton = document.getElementById('show-log');
+const hideButton = document.getElementById('hide-log');
 const input = document.getElementById('item');
+const log = document.getElementById('log');
+log.style.display = 'none';
+hideButton.style.display = 'none';
 
 let itemsArray;
 if (localStorage.getItem('items')) {
@@ -19,6 +24,18 @@ const liMaker = text => {
     ul.appendChild(li);
 };
 
+data.forEach(item => {
+    liMaker(item)
+});
+
+clearButton.addEventListener('click', function() {
+    localStorage.clear();
+    while (ul.firstChild) {
+        ul.removeChild(ul.firstChild);
+    }
+});
+
+
 form.addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -29,13 +46,22 @@ form.addEventListener('submit', function(e) {
     input.value = '';
 });
 
-data.forEach(item => {
-    liMaker(item)
+showButton.addEventListener('click', function() {
+    showLog();
 });
 
-button.addEventListener('click', function() {
-    localStorage.clear();
-    while (ul.firstChild) {
-        ul.removeChild(ul.firstChild);
-    }
+hideButton.addEventListener('click', function() {
+    hideLog();
 });
+
+function showLog() {
+    showButton.style.display = 'none';
+    hideButton.style.display = 'block';
+    log.style.display = 'block';
+}
+
+function hideLog() {
+    hideButton.style.display = 'none';
+    showButton.style.display = 'block';
+    log.style.display = 'none';
+}

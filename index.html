@@ -6,24 +6,51 @@
 
         <title>Empath: your new best friend</title>
 
-        <link rel="stylesheet" ref="styles/style.css" />
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
     </head>
 
     <body>
         <div class="container">
-            <p>
-                how are u feeling today? :-)
-            </p>
-            
-            <form>
-                <input id="item" type="text" placeholder="p stressed" required />
-            </form>
+            <div class="credit">made by Aileen Wu. read write-up here.</div>
+            <header>empath</header>
+            <div class="chatbox">
+                <div class="message-space">
+                    <div class="message-group">
+                        <div class="empath message">hi! nice to meet you!</div>
+                        <div class="empath message"> i'm empath, your new friend you can confide in & help you track your most recent emotions</div>
+                        <div class="empath message">what's your name?</div>
+                    </div>
+                    <div class="message-group">
+                        <div class="user message">name</div>
+                    </div>
+                    <form>
+                        <input id="name" type="text" placeholder="aileen" required />
+                    </form>    
+                    <div class="message-group">
+                        <div class="empath message">hi aileen!</div>
+                        <div class="empath message">last time you said this.</div>
+                        <div class="empath message">how are u feeling today? :-)</div>
+                    </div>
+                    <div class="message-group">
+                        <div class="user message">feeling</div>
+                    </div>
+                    <form>
+                        <input id="mood" type="text" placeholder="stressed" required />
+                        <button id="show-log">show my feelings history</button>
+                        <button id="hide-log">hide my feelings history</button>    
+                    </form>
+                    <div class="message-group">
+                        <div class="empath message">thanks for letting me know. visit soon!</div>
+                    </div>
 
-            <h2>ur past feelings :^)</h2>
-            <ul></ul>
-
-            <button>Clear All</button>
+                    <div class="log">
+                        <div>your past feelings</div>
+                        <ul></ul>
+                        <button id="clear">Clear All</button> 
+                    </div>
+                </div>
+            </div>
         </div>
-        <script src="scripts/script.js"></script>
+        <!--<script src="scripts/script.js"></script>-->
     </body>
 </html>
