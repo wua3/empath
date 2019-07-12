@@ -42,7 +42,7 @@ footer {
 }
 
 .chatbox {
-    max-height: 60vh;
+    height: 60vh;
     overflow: auto;
 }
 
@@ -58,11 +58,7 @@ footer {
     padding: 10px;
     border-radius: 15px;
     max-width: 70%;
-    /* opacity: 0;
-    transform: scale(0);
-    transition: .6s ease opacity,.6s ease transform; */
-
-
+    color: #fff;
 }
 
 .last-msg-right {

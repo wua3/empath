@@ -11,8 +11,8 @@ if (localStorage.getItem('name')) {
 }
 localStorage.setItem('name', name);
 
-let moodArray;
-if (localStorage.getItem('moods')) {
+let moodArray = [];
+if (localStorage.getItem('moods') && localStorage.getItem('moods').length > 2) {
     moodArray = JSON.parse(localStorage.getItem('moods'));
 } else {
     moodArray = [];
@@ -21,66 +21,125 @@ if (localStorage.getItem('moods')) {
 localStorage.setItem('moods', JSON.stringify(moodArray));
 const moodData = JSON.parse(localStorage.getItem('moods'));
 
-
+// turn everything invisible
 // DOM
 // texts
-const introTexts = document.getElementById('intro');
-const greetingText = document.getElementById('greeting');
-const returnerTexts = document.getElementsByClassName('old');
-const nameInstances = document.getElementsByClassName('name');
-const moodInstances = document.getElementsByClassName('mood');
-const lastMood = document.getElementsByClassName('last-mood');
+const introTexts = document.getElementsByClassName('intro');
+for (let i = 0; i < introTexts.length; i++) {
+    introTexts.item(i).style.display = 'none';
+}
+
+const checkinTexts = document.getElementsByClassName('checkin');
+for (let i = 0; i < checkinTexts.length; i++) {
+    checkinTexts.item(i).style.display = 'none';
+}
+
+const checkin2Texts = document.getElementsByClassName('checkin2');
+for (let i = 0; i < checkin2Texts.length; i++) {
+    checkin2Texts.item(i).style.display = 'none';
+}
+
 const nameText = document.getElementById('nameText');
 nameText.style.display = 'none';
 const moodText = document.getElementById('moodText');
 moodText.style.display = 'none';
 const byeText = document.getElementById('bye-msg');
 byeText.style.display = 'none';
+
+const nameInstances = document.getElementsByClassName('name');
+const moodInstances = document.getElementsByClassName('mood');
+const lastMood = document.getElementsByClassName('last-mood');
+
 // forms
 const nameForm = document.getElementById('nameForm');
+nameForm.style.display = 'none';
 const nameInput = document.getElementById('name');
 const moodForm = document.getElementById('moodForm');
+moodForm.style.display = 'none';
 const moodInput = document.getElementById('mood');
+
 // log
 const log = document.getElementById('log');
 const ul = document.querySelector('ul');
 const clearButton = document.getElementById('clear');
 const showButton = document.getElementById('show-log');
+showButton.style.display = 'none';
 const hideButton = document.getElementById('hide-log');
 log.style.display = 'none';
 hideButton.style.display = 'none';
 
 //
 //
+let totalTime = 1000;
+let timeInterval = 2000;
+
+if (newVisitor) {
+    for (let i = 0; i < introTexts.length; i++) {
+        setTimeout(function() {
+            introTexts.item(i).style.display = 'inline-block';
+        }, timeInterval += totalTime);
+    }
+    setTimeout(function() {
+        nameForm.style.display = 'flex';
+    }, timeInterval += totalTime);
+} else if (haveHistory) {
+    for (let i = 0; i < checkinTexts.length; i++) {
+        setTimeout(function() {
+            checkinTexts.item(i).style.display = 'inline-block';
+        }, timeInterval += totalTime);
+    }
+    setTimeout(function() {
+        moodForm.style.display = 'flex';
+        showButton.style.display = 'flex';
+    }, timeInterval += totalTime);
+} else if (!haveHistory) {
+    for (let i = 0; i < checkin2Texts.length; i++) {
+        setTimeout(function() {
+            checkin2Texts.item(i).style.display = 'inline-block';
+        }, timeInterval += totalTime);
+    }
+    setTimeout(function() {
+        moodForm.style.display = 'flex';
+        showButton.style.display = 'flex';
+    }, timeInterval += totalTime);
+}
 
 // event listeners
 nameForm.addEventListener('submit', function(e) {
     e.preventDefault();
     name = nameInput.value;
     localStorage.setItem('name', name);
-    // byeText.style.display = 'inline-block';
-    // window.setTimeout(function(){
-    //     byeText.style.opacity = 1;
-    //     byeText.style.transform = 'scale(1)';
-    // },0);  
-    for (var i = 0; i < nameInstances.length; i++) {
+    byeText.style.display = 'inline-block';
+    for (let i = 0; i < nameInstances.length; i++) {
         nameInstances.item(i).textContent=name;
     }
     nameText.style.display = 'inline-block';
     nameForm.style.display = 'none';
     nameInput.value = '';
+    for (let i = 0; i < checkin2Texts.length; i++) {
+        setTimeout(function() {
+            checkin2Texts.item(i).style.display = 'inline-block';
+        }, timeInterval += totalTime);
+    }
+    setTimeout(function() {
+        moodForm.style.display = 'flex';
+    }, timeInterval += totalTime);
+    setTimeout(function() {
+        showButton.style.display = 'flex';
+    }, timeInterval += totalTime);
 });
 
 moodForm.addEventListener('submit', function(e) {
     e.preventDefault();
-  
+
     moodArray.push(moodInput.value);
     localStorage.setItem('moods', JSON.stringify(moodArray));
-    for (var i = 0; i < moodInstances.length; i++) {
+    for (let i = 0; i < moodInstances.length; i++) {
         moodInstances.item(i).textContent=moodInput.value;
     }
     liMaker(moodInput.value);
     moodInput.value = '';
+
     moodText.style.display = 'inline-block';
     byeText.style.display = 'inline-block';
     moodForm.style.display = 'none';
@@ -91,7 +150,9 @@ moodForm.addEventListener('submit', function(e) {
 });
 
 clearButton.addEventListener('click', function() {
+    let rememberName = name;
     localStorage.clear();
+    localStorage.setItem('name', name);
     while (ul.firstChild) {
       ul.removeChild(ul.firstChild);
     }
@@ -123,131 +184,10 @@ moodData.forEach(item => {
   liMaker(item);
 });
 
-for (var i = 0; i < nameInstances.length; i++) {
+for (let i = 0; i < nameInstances.length; i++) {
     nameInstances.item(i).textContent=name;
 }
 
-for (var i = 0; i < lastMood.length; i++) {
+for (let i = 0; i < lastMood.length; i++) {
     lastMood.item(i).textContent=moodData[moodData.length-1];
 }
-
-
-/* // texts
-const introTexts = document.getElementById('intro');
-const greetingText = document.getElementById('greeting');
-
-// forms
-const nameForm = document.getElementById('nameForm');
-const moodForm = document.getElementById('moodForm');
-const moodInput = document.getElementById('mood');
-
-// log
-const ul = document.querySelector('ul');
-const clearButton = document.getElementById('clear');
-
-// dealing w/ local storage
-let moodsArray;
-if (localStorage.getItem('moods')) {
-    moodsArray = JSON.parse(localStorage.getItem('moods'));
-} else {
-    moodsArray = [];
-}
-localStorage.setItem('moods', JSON.stringify(moodsArray));
-const moodsData = JSON.parse(localStorage.getItems('moods'));
-
-const liMaker = text => {
-    const li = document.createElement('li');
-    li.textContent = text;
-    ul.appendChild(li);
-};
-
-// event listeners
-moodForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    moodsArray.push(moodInput.value);
-    localStorage.setItem('moods', JSON.stringify(moodsArray));
-    liMaker(moodInput.value);
-    moodInput.value = '';
-});
-
-// update display
-moodsData.forEach(item => {
-    liMaker(item)
-});
-
-clearButton.addEventListener('click', function() {
-    localStorage.clear()
-    while(ul.firstChild) {
-        ul.removeChild(ul.firstChild)
-    }
-}) */
-
-
-/* const form = document.querySelector('form');
-const ul = document.querySelector('ul');
-const clearButton = document.getElementById('clear');
-const showButton = document.getElementById('show-log');
-const hideButton = document.getElementById('hide-log');
-const input = document.getElementById('item');
-const log = document.getElementById('log');
-log.style.display = 'none';
-hideButton.style.display = 'none';
-
-let itemsArray;
-if (localStorage.getItem('items')) {
-    itemsArray = JSON.parse(localStorage.getItem('items'));
-} else {
-    itemsArray = [];
-}
-
-localStorage.setItem('items', JSON.stringify(itemsArray));
-const data = JSON.parse(localStorage.getItem('items'));
-
-const liMaker = text => {
-    const li = document.createElement('li');
-    li.textContent = text;
-    ul.appendChild(li);
-};
-
-data.forEach(item => {
-    liMaker(item)
-});
-
-clearButton.addEventListener('click', function() {
-    localStorage.clear();
-    while (ul.firstChild) {
-        ul.removeChild(ul.firstChild);
-    }
-});
-
-
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    itemsArray.push(input.value);
-    localStorage.setItem('items', JSON.stringify(itemsArray));
-
-    liMaker(input.value);
-    input.value = '';
-});
-
-showButton.addEventListener('click', function() {
-    showLog();
-});
-
-hideButton.addEventListener('click', function() {
-    hideLog();
-});
-
-function showLog() {
-    showButton.style.display = 'none';
-    hideButton.style.display = 'block';
-    log.style.display = 'block';
-}
-
-function hideLog() {
-    hideButton.style.display = 'none';
-    showButton.style.display = 'block';
-    log.style.display = 'none';
-} */
