@@ -1,73 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+
 body {
-    font-family: 'Arial';
+    font-family: 'Karla';
     font-size: 16px;
 }
 
 .container {
-    margin: 0 auto;
-    max-width: 500px;
+    margin: auto;
+    margin-top: 5vh;
+    margin-bottom: 0px;
+    max-width: 400px;
 }
 
 header {
+    padding-left: 15px;
     font-size: 30px;
-    width: auto;
+    padding-top: 10px;
     padding-bottom: 10px;
-    border-bottom: 2px solid black;
+    background-color: #757d75;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    color: #fff;
+    font-weight: 300;
 }
 
-.credit {
-    position: fixed;
-    right: 0;
-    text-align: right;
+footer {
+    padding-left: 15px;
     font-size: 12px;
+    text-align: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    background-color: #757d75;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    color: #fff;
 }
 
 .chatbox {
-    max-height: 500px;
+    max-height: 60vh;
     overflow: auto;
 }
 
 .message-group {
+    display: flex;
+    flex-direction: column;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .message {
-    display: inline-block;
     margin: 5px 10px;
     padding: 10px;
     border-radius: 15px;
+    max-width: 70%;
 }
 
-.empath {
-    margin-right: 200px;
-    background-color: #00ffaa;
+.empath-pos {
+    align-items: flex-start;
 }
 
-.user {
-    margin-left: 200px; 
-    margin-right: 10px;    
-    background-color: #ffaa00;
-    float: right;
+.user-pos {
+    align-items: flex-end;
 }
 
-form {
-    float: center;
+.input-pos {
+    align-items: center;
+}
+
+.empath-color {
+    background-color: #f56642;
+}
+
+.user-color {
+    background-color: #8f87ff;
 }
 
 input {
-    width: 50%;
     background-color: #ecf0f1;
     padding: 10px;
     border-radius: 10px;
     border: none;
+    font-size: 16px;
+}
+
+input, button {
+    font-family: 'Karla';
 }
 
 button {
-    display: block;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #ecf0f1;
+    color: #f56642;
+    font-weight: 700;
 }
 
 .log {
-    background-color: #757d75;
-    border-radius: 10px;
+    background-color: #eee;
+    padding-bottom: 10px;
 }
