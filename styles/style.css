@@ -41,7 +41,7 @@ footer {
     color: #fff;
 }
 
-.chatbox {
+#chatbox {
     height: 60vh;
     overflow: auto;
 }

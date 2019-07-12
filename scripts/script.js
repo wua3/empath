@@ -109,7 +109,6 @@ nameForm.addEventListener('submit', function(e) {
     e.preventDefault();
     name = nameInput.value;
     localStorage.setItem('name', name);
-    byeText.style.display = 'inline-block';
     for (let i = 0; i < nameInstances.length; i++) {
         nameInstances.item(i).textContent=name;
     }
@@ -139,14 +138,11 @@ moodForm.addEventListener('submit', function(e) {
     }
     liMaker(moodInput.value);
     moodInput.value = '';
-
     moodText.style.display = 'inline-block';
-    byeText.style.display = 'inline-block';
     moodForm.style.display = 'none';
-    // window.setTimeout(function(){
-    //     byeText.style.opacity = 1;
-    //     byeText.style.transform = 'scale(1)';
-    // },0);
+    setTimeout(function() {
+        byeText.style.display = 'inline-block';
+    }, timeInterval);
 });
 
 clearButton.addEventListener('click', function() {
@@ -173,7 +169,7 @@ hideButton.addEventListener('click', function() {
 //
 //
 
-// display
+// other display stuff
 const liMaker = text => {
   const li = document.createElement('li');
   li.textContent = text;
